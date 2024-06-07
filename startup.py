@@ -9,7 +9,7 @@ import urllib.request, json
 from tool import get_wiki_url, write_doc
 
 wiki_url = get_wiki_url()
-url = "{}/rest/api/content?type=page&start=0&limit=99999".format(wiki_url)
+url = "{}/rest/api/content?type=page&start=0&limit=999999".format(wiki_url)
 
 batch_size = 5
 
