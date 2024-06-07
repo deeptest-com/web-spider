@@ -6,3 +6,9 @@ def get_wiki_url():
 
     return os.environ["WIKI_URL"]
 
+def write_doc(docsDir, id, content):
+    docPath = os.path.join(docsDir, id + ".html")
+    file = open(docPath, 'w')
+
+    file.write(content)
+    file.close()
