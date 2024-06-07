@@ -1,8 +1,8 @@
-from tool import get_nancal_cloud_url
+from tool import get_wiki_url
 
-nancal_cloud_url = get_nancal_cloud_url()
+wiki_url = get_wiki_url()
 
-url = "{}/rest/api/content?type=page&start=0&limit=99999".format(nancal_cloud_url)
+url = "{}/rest/api/content?type=page&start=0&limit=99999".format(wiki_url)
 
 from langchain_community.document_loaders import AsyncHtmlLoader, JSONLoader
 from langchain_community.document_transformers import BeautifulSoupTransformer
@@ -14,7 +14,7 @@ with urllib.request.urlopen(url) as url:
     results = data['results']
 
 for result in results:
-    pageUrl = "{}/pages/viewpage.action?pageId={id}".format(nancal_cloud_url, id=result["id"])
+    pageUrl = "{}/pages/viewpage.action?pageId={id}".format(wiki_url, id=result["id"])
     print(pageUrl)
 
     loader = AsyncHtmlLoader([pageUrl])
