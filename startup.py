@@ -1,5 +1,6 @@
 import os
 import time
+import re
 
 from langchain_community.document_loaders import AsyncHtmlLoader, JSONLoader
 from langchain_community.document_transformers import BeautifulSoupTransformer
@@ -51,11 +52,16 @@ for batch_urls in batch_urls_arr:
             remove_comments=True))
 
     for doc_transformer in docs_transformer:
+        source = doc_transformer.metadata["source"]
+        ids = re.findall(r"pageId=(\d+?)$", source)
+
+        id = 0
+        if ids.__len__() > 0:
+            id = ids[0]
+
         title = doc_transformer.metadata["title"]
         content = doc_transformer.page_content
 
-        write_doc(docsDir, title, content)
-
-        print(title)
+        write_doc(docsDir, id, title, content)
 
     time.sleep(1)
